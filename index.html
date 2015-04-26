@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html ng-app="LandCom" >
+    <head>
+        <meta charset="utf-8">
+        <title>Land.com</title>
+
+        <link href="css/style.css" rel="stylesheet"/>
+         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+         
+           <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.408/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.408/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.408/styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.408/styles/kendo.dataviz.material.min.css" />
+
+    <script src="http://cdn.kendostatic.com/2015.1.408/js/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2015.1.408/js/kendo.all.min.js"></script>
+        
+         
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dijit/themes/claro/claro.css">
+ <script>dojoConfig = {parseOnLoad: true}</script>
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8/dojo/dojo.js"></script>
+        <!-- AngularJS -->
+        <script src="js/lib/angularjs.min.js?v=1.2.26"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+        <!-- Google Maps -->
+        <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=visualization"></script>
+         
+        <!-- angular-goole-maps -->
+        <script src="js/lib/lodash.underscore.min.js?v=2.4.1"></script>
+        <script src="js/lib/angular-google-maps.min.js?v=1.2.2"></script>
+
+        <!-- Custom angular module -->
+        <script src="js/map.js?v=1.0"></script>
+        
+      
+      
+       
+    </head>
+    <body ng-controller="MapCtrl" class="claro">
+    
+    
+
+  <div style="height:100vh;  background-image: url(./images/city.jpg);background-size:cover" id="mainActive">
+  		<div style="display: table;  margin: auto auto;"> 			
+  			<div class="container">
+  				<h2 style="color: white;">Company Selection</h2>
+  			</div>
+  			<form class="form-horizontal" role="form">
+  				<div class="form-group">
+            		<label style="color: yellow;" class="control-label col-sm-2" >Builder:</label>
+            		 <div class="col-sm-5">
+	            		<input type="text" class="form-control" ng-model="builderName" >
+	            			
+	           			</select>
+	           	      </div>
+           		</div>
+          	 	<div class="form-group">
+            		<label style="color: yellow;" class="control-label col-sm-2">Type:</label>
+           		    <div class="col-sm-5">
+            			<select class="form-control" ng-model="pref">
+            				<option>Industrial</option>
+            				<option>Residential</option>
+          				</select>
+          			</div>
+          		</div>
+          		<div class="form-group">        
+      				<div class="col-sm-offset-2 col-sm-10">
+            			<button class="btn btn-default" ng-click="getPreferences(builderName, pref)">Submit</button>
+            		</div>
+            	</div>
+            </form>
+        </div>
+  </div>
+  <div class="map_container"   >
+       <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
+           <markers models="map.markers" coords="'self'" options="'options'" click="'onClick'">
+ 
+           </markers>
+       </google-map>
+		<div id="window0" >
+			<div class="container">
+				<h2>Sentiments around HSR Layout</h2>
+			</div>
+			<form class="form-horizontal" role="form">
+  				<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >Food Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >3.5/5</label>            		
+           		</div>
+           		<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >healthcare Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >0.0/5</label>            		
+           		</div>
+           		<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >Education Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >2.68/5</label>            		
+           		</div>
+           	</form>			
+		</div>
+		<div id="window1" >
+			<div class="container">
+				<h2>Sentiments around Indiranagar</h2>
+			</div>
+			<form class="form-horizontal" role="form">
+  				<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >Food Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >4.03/5</label>            		
+           		</div>
+           		<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >healthcare Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >0.0/5</label>            		
+           		</div>
+           		<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >Education Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >3.7/5</label>            		
+           		</div>
+           	</form>		
+			
+		</div>
+		<div id="window2" >
+		<div class="container">
+				<h2>Sentiments around Koramangala</h2>
+			</div>
+			<form class="form-horizontal" role="form">
+  				<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >Food Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >3.88/5</label>            		
+           		</div>
+           		<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >healthcare Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >0.0/5</label>            		
+           		</div>
+           		<div class="form-group">
+            		<label style="color: black;" class="control-label col-sm-2" >Education Average Sentiment:</label>
+            		<label style="color: black;" class="control-label col-sm-2" >0.0/5</label>            		
+           		</div>
+           	</form>			
+		</div>
+   </div>  
+      
+	
+	<script type="text/ng-template" id="/map.html">
+
+	
+      
+	</script>
+ 
+ 
+  <script>
+                $(document).ready(function() {
+                   
+                });
+            </script>
+
+            <style>
+
+                #example {
+                    min-height: 840px;
+                }
+
+                #undo {
+                    text-align: center;
+                    position: absolute;
+                    white-space: nowrap;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 2em;
+                    cursor: pointer;
+                }
+            </style>
+    </body>
+</html>
